@@ -9,7 +9,7 @@ const StudentSchema = mongoose.Schema({
     ID: Number,
     password: String,
     email: String,
-    phone_number: Number,
+    phoneNumber: Number,
     profile_image: String,
     verified: {
         type: Boolean,
