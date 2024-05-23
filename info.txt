@@ -1,0 +1,53 @@
+Essential APIs:
+Authentication Service API:
+/student/register: User registration.
+/student/login: User login.
+/student/logout: User logout.
+/student/validate-token: Validate user authentication token.
+
+ADMIN APIs:
+/admin/login: Admin login
+/admin/add: Add details and price for new materials
+/admin/delete: Delete unavailable materials
+
+User Service API:
+/user/{id}: Get user details.
+/user/{id}/profile: Manage user profile.
+/user/{id}/preferences: Manage user preferences.
+
+Payment Service API:
+/payment/process: Process transactions for payment.
+
+Media Service API:
+/media/upload: Upload media files.
+/media/{id}/download: Download media files.
+
+Documentation Service API:
+/api-docs/generate: Generate API documentation.
+/api-docs/{id}/view: View API documentation.
+
+Notification Service API:
+/notification/send: Send notifications to users.
+
+Reporting Service API:
+/report/{id}/submit: Allow users to report transaction or any other issue.
+
+Feedback API:
+/feedback/submit: Collect feedback from users.
+ 
+Search Service API:
+/search: Implement search functionality.
+
+Other APIs
+/user/login: User login.
+/admin/users/setup: Setting up of accepted matric numbers for each course and adding of courses.
+/admin/add: Adding of new admin by superuser.
+/chat/coursecode:  Chat for each course for live lectures.
+/admin/notification/send: Adding of notification for students.
+/user/upload/coursecode: Submission of assignments.
+/admin/approve: For students with unrecognized matric numbers to be approved.
+/admin/upload/coursecode: Adding PDFs or other things to a course.
+/pay/coursecode: Payment for manuals.
+/auth: Route security.
+/info/studentID: student profile.
+/admin/setup: Setting up boundaries, adding courses and levels lecturers can handle.
