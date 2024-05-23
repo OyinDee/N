@@ -1,3 +1,24 @@
+ try {
+  
+      i
+  
+      const match = await bcryptjs.compare(myPlaintextPassword, passw);
+  
+      if (match) {
+        const token = jwt.sign({ email: email }, process.env.JWT_SECRET, { expiresIn: '1h' });
+  
+        response.cookie('access_token', token, { httpOnly: true, maxAge: 3600000 }); // Set the token in an HTTP-only cookie
+        response.json({ message: "Your login is successful!", token });
+      } else {
+        response.status(401).json({ message: "Incorrect password" });
+      }
+    } catch (error) {
+      console.error(error.message);
+      response.status(500).json({ message: 'Internal Server Error', error: error.message });
+    }
+
+
+
 Essential APIs:
 Authentication Service API:
 /student/register: User registration.

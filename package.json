@@ -1,9 +1,13 @@
 {
+  "scripts": {
+    "start": "nodemon index.js"
+  },
   "dependencies": {
     "async": "^3.2.5",
     "axios": "^1.7.2",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
+    "cloudinary": "^2.2.0",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
@@ -12,6 +16,7 @@
     "mongodb": "^6.6.2",
     "mongoose": "^8.4.0",
     "node": "^18.20.3",
+    "nodemailer": "^6.9.13",
     "nodemon": "^3.1.0",
     "paystack": "^2.0.1",
     "sha256": "^0.2.0",
