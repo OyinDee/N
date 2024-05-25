@@ -1,40 +1,34 @@
- try {
-  
-      i
-  
-      const match = await bcryptjs.compare(myPlaintextPassword, passw);
-  
-      if (match) {
-        const token = jwt.sign({ email: email }, process.env.JWT_SECRET, { expiresIn: '1h' });
-  
-        response.cookie('access_token', token, { httpOnly: true, maxAge: 3600000 }); // Set the token in an HTTP-only cookie
-        response.json({ message: "Your login is successful!", token });
-      } else {
-        response.status(401).json({ message: "Incorrect password" });
-      }
-    } catch (error) {
-      console.error(error.message);
-      response.status(500).json({ message: 'Internal Server Error', error: error.message });
-    }
-
-
-
-Essential APIs:
+Done:
 Authentication Service API:
 /student/register: User registration.
 /student/login: User login.
-/student/logout: User logout.
-/student/validate-token: Validate user authentication token.
-
-ADMIN APIs:
+/student/validate-token: Validate user authentication token and route security
+/admin/add: Adding of new admin by superuser.
 /admin/login: Admin login
-/admin/add: Add details and price for new materials
-/admin/delete: Delete unavailable materials
+/super/addAdmin
+/super/addStudent
+/super/login
+/super/addSuper
+
+Essential APIs:
 
 User Service API:
 /user/{id}: Get user details.
 /user/{id}/profile: Manage user profile.
 /user/{id}/preferences: Manage user preferences.
+/user/upload/coursecode: Submission of assignments.
+
+
+ADMIN APIs:
+/admin/upload/coursecode: Adding PDFs or other things to a course
+/admin/approve: For students with unrecognized matric numbers to be approved.
+/admin/notification/send: Adding of notification for students.
+/admin/addcourse: Add details and price for new materials
+/admin/delete: Delete unavailable materials
+/admin/setup: Setting up boundaries, adding courses and levels lecturers can handle.
+/admin/users/setup: Setting up of accepted matric numbers for each course and adding of courses.
+
+
 
 Payment Service API:
 /payment/process: Process transactions for payment.
@@ -60,15 +54,8 @@ Search Service API:
 /search: Implement search functionality.
 
 Other APIs
-/user/login: User login.
-/admin/users/setup: Setting up of accepted matric numbers for each course and adding of courses.
-/admin/add: Adding of new admin by superuser.
+
+
 /chat/coursecode:  Chat for each course for live lectures.
-/admin/notification/send: Adding of notification for students.
-/user/upload/coursecode: Submission of assignments.
-/admin/approve: For students with unrecognized matric numbers to be approved.
-/admin/upload/coursecode: Adding PDFs or other things to a course.
 /pay/coursecode: Payment for manuals.
-/auth: Route security.
 /info/studentID: student profile.
-/admin/setup: Setting up boundaries, adding courses and levels lecturers can handle.

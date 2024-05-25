@@ -39,7 +39,8 @@ db.once('open', () => {
 // import routes
 
 const studentRouter = require('./routes/studentRouter')
-
+const adminRouter = require('./routes/adminRouter')
+const superRouter = require('./routes/superRouter')
 // middlewares
 app.use(bodyParser.json());
 app.use(express.json({ limit: '50mb' }));
@@ -49,6 +50,9 @@ app.use(cors());
 // Mount routes on API routes(/api/version)
 
 app.use("/api/v1/student", studentRouter);
+app.use("/api/v1/admin", adminRouter);
+app.use("/api/v1/super", superRouter);
+
 
 
 

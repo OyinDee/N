@@ -1,13 +1,10 @@
 const mongoose = require("mongoose");
 
-const StudentSchema = mongoose.Schema({
+const AdminSchema = mongoose.Schema({
     firstName: String,
     lastName: String,
     courses: Object,
-    level: Number,
     token: String,
-    tokenNumber: Number,
-    department: String,
     ID: Number,
     password: String,
     email: String,
@@ -20,10 +17,10 @@ const StudentSchema = mongoose.Schema({
     created_at: String,
     admin: {
         type: Boolean,
-        default: false
+        default: true
     },
 });
 
-const studentModel = mongoose.model("students", StudentSchema);
+const adminModel = mongoose.model("admin", AdminSchema);
 
-module.exports = studentModel;
+module.exports = adminModel;

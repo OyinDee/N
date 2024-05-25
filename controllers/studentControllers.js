@@ -7,7 +7,7 @@ const sha256 = require('sha256')
 const JWT_SECRET = process.env.JWT_SECRET
 const JWT_KEY = process.env.JWT_KEY
 
-// for emAIL VERIFICATION
+// // for emAIL VERIFICATION
 
 const transporter = nodemailer.createTransport({
     service: 'Gmail',
@@ -43,6 +43,7 @@ const register = async (request, response) => {
       ID: ID, email:email
     }
     const token = jwt.sign(data, JWT_SECRET)
+    const tokenNumber =  Math.floor(Math.random() * 9000) + 1000;
     const newUser = {
       email: email,
       firstName: request.body.firstName,
@@ -55,6 +56,7 @@ const register = async (request, response) => {
       created_at: date,
       ID: ID,
       token: token,
+      tokenNumber: tokenNumber,
     };
 
     const emailExists = await studentModel.find({ email: newUser.email });
@@ -63,9 +65,22 @@ const register = async (request, response) => {
     if (emailExists.length > 0) {
       console.log("Email exists");
       response.send({ message: `Email already exists.`, text: 'no' });
-    }  else {
-      response.send({ message: {token}, text: 'Success' });
-                                                                            
+    }  else {    
+      const mailOptions = {
+        from: 'iceysh.ts@gmail.com',
+        to: email,
+        subject: 'Confirm your email address',
+        text: `Hey, Jiggy! \nEnter this code to verify your email address: ${tokenNumber}`,
+      };
+      transporter.sendMail(mailOptions, (error, info) => {
+        if (error) {
+          console.log(error);
+          response.status(500).send('Error sending verification email.');
+        } else {
+          console.log('Email sent: ' + info.response + tokenNumber );
+          response.send('Success! Verification email sent.');
+        }
+      });
 
       await studentModel.create(newUser).then((result)=>{
         console.log(result)
@@ -117,5 +132,18 @@ const register = async (request, response) => {
         }
     })
   }
+
+  const verify= async(request, response)=>{
+   const update = await studentModel.findOneAndUpdate({tokenNumber: request.body.tokenNumber}, {verified: true}, {new: true})
+   if (update) {
+   console.log(update)
+
+    response.send("Yes")
+   } else {
+   console.log(update)
+
+    response.send("No")
+   }
+    }
   
-  module.exports = { login, register, validate_token };
+  module.exports = { login, register, validate_token, verify };
