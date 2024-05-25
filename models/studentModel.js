@@ -5,6 +5,7 @@ const StudentSchema = mongoose.Schema({
     lastName: String,
     courses: Object,
     level: Number,
+    token: String,
     department: String,
     ID: Number,
     password: String,

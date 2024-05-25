@@ -4,7 +4,8 @@ const { createHash } = require('crypto');
 const bcryptjs = require('bcryptjs');
 const nodemailer = require("nodemailer");
 const sha256 = require('sha256')
-
+const JWT_SECRET = process.env.JWT_SECRET
+const JWT_KEY = process.env.JWT_KEY
 
 // for emAIL VERIFICATION
 
@@ -25,7 +26,7 @@ const transporter = nodemailer.createTransport({
 // @access public
 const register = async (request, response) => {
     console.log(request.body);
-
+   
     const email = request.body.email;
     const firstName = request.body.firstName;
     const lastName = request.body.lastName;
@@ -34,11 +35,14 @@ const register = async (request, response) => {
     const department = request.body.department;
     const date = new Date();
     const plainPassword = request.body.password;
-      const salt = bcryptjs.genSaltSync(10);
-      const hashedPass = bcryptjs.hashSync(plainPassword, salt);
-      const ID = Math.floor(Math.random() * 9000000) + 1000000;
+    const salt = bcryptjs.genSaltSync(10);
+    const hashedPass = bcryptjs.hashSync(plainPassword, salt);
+    const ID = Math.floor(Math.random() * 9000000) + 1000000;
     const phoneNumber = request.body.phoneNumber;
-    
+    let data = {
+      ID: ID, email:email
+    }
+    const token = jwt.sign(data, JWT_SECRET)
     const newUser = {
       email: email,
       firstName: request.body.firstName,
@@ -50,6 +54,7 @@ const register = async (request, response) => {
       phoneNumber: request.body.phoneNumber,
       created_at: date,
       ID: ID,
+      token: token,
     };
 
     const emailExists = await studentModel.find({ email: newUser.email });
@@ -59,7 +64,7 @@ const register = async (request, response) => {
       console.log("Email exists");
       response.send({ message: `Email already exists.`, text: 'no' });
     }  else {
-      response.send({ message: 'Success', text: 'yes' });
+      response.send({ message: {token}, text: 'Success' });
                                                                             
 
       await studentModel.create(newUser).then((result)=>{
@@ -69,18 +74,48 @@ const register = async (request, response) => {
   
 }
     
-  
+  const login = async(request, response) =>{
+    console.log(request.body)
+    const email = request.body.email
+    const Rpassword = request.body.password
+    const emailExists = await studentModel.find({ email: email });
 
-  const logout = () =>{
+    if (emailExists.length !== 0) {
+      console.log('FOUND')
+      const email = emailExists[0].email;
+      const password = emailExists[0].password;  
+    
 
+      const match = await bcryptjs.compare(Rpassword, password);
+
+      if (match) {
+        console.log("yes")
+        response.send("Logged in")
+      } else {
+        console.log("no")
+        response.send("Wrong password")
+      }
+
+    } else {
+      response.send({message: "What you need to do is create an account..", status: 404, text: "NO"})
+    }
+    
+  }
+
+  const validate_token = (request, response) => {
+    const auth = request.headers.authorization
+    const token = auth.split(' ')[1]
+    console.log(token)
+    jwt.verify(token,process.env.JWT_SECRET,(err,decoded)=>{
+        if(err){
+            console.log(`jwt could not be decoded`)
+            response.send({message:err.message})
+        }  
+        else{
+            console.log(decoded)
+            response.send({message:'verification successful', email:decoded.email, ID: decoded.ID})
+        }
+    })
   }
   
-  const login = () =>{
-
-  }
-
-  const validate_token = () => {
-
-  }
-  
-  module.exports = { login, register, logout, validate_token };
+  module.exports = { login, register, validate_token };

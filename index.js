@@ -37,7 +37,7 @@ db.once('open', () => {
 });
 
 // import routes
-const userRouter = require('./routes/user_routes')
+
 const studentRouter = require('./routes/studentRouter')
 
 // middlewares
@@ -47,7 +47,7 @@ app.use(express.urlencoded({ limit: '50mb', extended: true }));
 app.use(cors());
 
 // Mount routes on API routes(/api/version)
-app.use("/api/v1/user", userRouter);
+
 app.use("/api/v1/student", studentRouter);
 
 
