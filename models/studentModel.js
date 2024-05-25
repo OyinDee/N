@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 const StudentSchema = mongoose.Schema({
     firstName: String,
     lastName: String,
-    courses: Object,
     level: Number,
     token: String,
     tokenNumber: Number,

@@ -2,6 +2,8 @@ const jwt = require('jsonwebtoken');
 const superModel = require("../models/superModel");
 const adminModel = require("../models/adminModel")
 const studentModel = require("../models/studentModel")
+const courseModel = require("../models/courseModel")
+
 const { createHash } = require('crypto');
 const bcryptjs = require('bcryptjs');
 const nodemailer = require("nodemailer");
@@ -215,4 +217,17 @@ const login = async(request, response)=>{
       }
 }
 
-module.exports = {addAdmin, addSuper, addStudent, login}
+const setupCourse = async(request, response) =>{
+    console.log(request)
+    const newCourse = {
+      courseCode: request.body.courseCode,
+      students: request.body.students,
+      lecturers: request.body.lecturers,
+      materials: request.body.materials,
+      courseID: Math.floor(Math.random() * 9000) + 1000,
+    }
+    await courseModel.create(newCourse).then((result)=>{
+      console.log(result)
+    });
+}
+module.exports = {addAdmin, addSuper, addStudent, login, setupCourse}

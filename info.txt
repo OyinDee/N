@@ -19,8 +19,10 @@ User Service API:
 /user/upload/coursecode: Submission of assignments.
 
 
+/super/upload/coursecode: Adding PDFs or other things to a course
+
 ADMIN APIs:
-/admin/upload/coursecode: Adding PDFs or other things to a course
+
 /admin/approve: For students with unrecognized matric numbers to be approved.
 /admin/notification/send: Adding of notification for students.
 /admin/addcourse: Add details and price for new materials
@@ -58,4 +60,4 @@ Other APIs
 
 /chat/coursecode:  Chat for each course for live lectures.
 /pay/coursecode: Payment for manuals.
-/info/studentID: student profile.
+
