@@ -1,5 +1,4 @@
 // initialization
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -7,7 +6,6 @@ const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const http = require('http');
 const socketIo = require('socket.io');
-
 
 // configuration of the secret file
 dotenv.config();
@@ -24,8 +22,8 @@ server.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
   });
 
-// Connect to MongoDB
-mongoose.connect(process.env.URI, {
+  // Connect to MongoDB
+  mongoose.connect(process.env.URI, {
 
 });
 
@@ -39,19 +37,23 @@ db.once('open', () => {
 // import routes
 
 const studentRouter = require('./routes/studentRouter')
+const feedbackRouter = require("./routes/feedbackRouter")
 const adminRouter = require('./routes/adminRouter')
+const assignmentRouter = require('./routes/assignmentRouter')
 const superRouter = require('./routes/superRouter')
 // middlewares
-app.use(bodyParser.json());
-app.use(express.json({ limit: '50mb' }));
-app.use(express.urlencoded({ limit: '50mb', extended: true }));
-app.use(cors());
+app.use(express.json({ extended: false, limit: '50mb' }))
+app.use(express.urlencoded({ limit: '50mb', extended: false, parameterLimit: 50000 }))
 
 // Mount routes on API routes(/api/version)
 
 app.use("/api/v1/student", studentRouter);
 app.use("/api/v1/admin", adminRouter);
 app.use("/api/v1/super", superRouter);
+app.use("/api/v1/feedback", feedbackRouter);
+app.use("/api/v1/submit", assignmentRouter);
+
+
 
 
 
