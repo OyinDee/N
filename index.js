@@ -16,6 +16,7 @@ const PORT = process.env.PORT||6000;
 
  // Use CORS middleware
  app.use(cors());
+ 
 
 // Create an HTTP server and integrate with Express
 const server = http.createServer(app);
