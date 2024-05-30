@@ -7,8 +7,6 @@ const mongoose = require('mongoose');
 const http = require('http');
 const socketIo = require('socket.io');
 
-// configuration of the secret file
-dotenv.config();
 
 // Create an instance of Express
 const app = express();
@@ -17,6 +15,9 @@ const PORT = process.env.PORT||6000;
  // Use CORS middleware
  app.use(cors());
  
+
+// configuration of the secret file
+dotenv.config();
 
 // Create an HTTP server and integrate with Express
 const server = http.createServer(app);
@@ -30,6 +31,10 @@ server.listen(PORT, () => {
   mongoose.connect(process.env.URI, {
 
 });
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.js');
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Check the database connection
 const db = mongoose.connection;

@@ -1,0 +1,32 @@
+/api/v1/student/register: Register students, students signup
+Requirements: email, password, firstName, password, lastName, department, level, phoneNumber
+possible responses:
+
+{ message: `Email already exists.`, text: 'no' }
+or
+{message: 'Success! Verification email sent.', info: token} 
+token to be saved for further usage
+or
+'Error sending verification email.'
+
+
+/api/v1/student/verify: Verify token number (OTP)
+Requirements: tokenNumber
+
+possible response: "Yes" or "No"
+
+
+
+/api/v1/student/login: Student login
+
+Requirements: email, password
+
+possible responses: "Logged in" or "Wrong password" or {message: "What you need to do is create an account..", status: 404, text: "NO"}
+
+
+/api/v1/student/validate_token
+Requirements: headers.authorization should be set as token(token already saved on signup)
+
+
+possible responses: {message:err.message} or {message:'verification successful', email:decoded.email, ID: decoded.ID}
+

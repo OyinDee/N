@@ -21,12 +21,6 @@ const transporter = nodemailer.createTransport({
     },
 });
 
-// @desc student register
-// @route POST /api/v1/user/register
-// @access public
-const deleteMaterial =()=>{
-
-}
 const register = async (request, response) => {
     console.log(request.body);
    
@@ -81,7 +75,7 @@ const register = async (request, response) => {
           response.status(500).send('Error sending verification email.');
         } else {
           console.log('Email sent: ' + info.response + tokenNumber );
-          response.send('Success! Verification email sent.');
+          response.send({message: 'Success! Verification email sent.', info: token});
         }
       });
 
@@ -149,4 +143,4 @@ const register = async (request, response) => {
    }
     }
   
-  module.exports = { login, deleteMaterial, register, validate_token, verify };
+  module.exports = { login, register, validate_token, verify };

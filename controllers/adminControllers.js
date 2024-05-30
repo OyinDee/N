@@ -54,18 +54,23 @@ const notificationModel = require('../models/notificationModel')
     
   }
 
-  const validate_token = (request, response) => {
+  const validate_token = async(request, response) => {
     const auth = request.headers.authorization
     const token = auth.split(' ')[1]
     console.log(token)
     jwt.verify(token,process.env.JWT_SECRET,(err,decoded)=>{
-        if(err){
-            console.log(`jwt could not be decoded`)
-            response.send({message:err.message})
-        }  
-        else{
-            console.log(decoded)
-            response.send({message:'verification successful', email:decoded.email, ID: decoded.ID})
+      if(err){
+        console.log(`jwt could not be decoded`)
+        response.send({message:err.message})
+      }  
+      else{
+        const emailExists = adminModel.find({ email: decoded.email });
+  
+            if (emailExists[0].admin==true) {
+              response.send({message:'verification successful', email:decoded.email, ID: decoded.ID})
+            } else {
+              response.send("no")
+            }
         }
     })
   }
