@@ -19,9 +19,47 @@ const JWT_KEY = process.env.JWT_KEY
     });
     
     // Upload an image
-    const submit = async(request,response) =>{
+    const create = async(request,response) =>{
+        const ID =  Math.floor(Math.random() * 9000) + 1000;
         console.log(request.body)
-        
+        const newsAssignment = {
+            courseID: request.body.courseID,
+            body: request.body.body,
+            deadline: request.body.date,
+            title: request.body.title,
+            ID: ID,
+        }
+        assignmentModel.create(newsAssignment)
+        response.send("submitted")
+    }
+    const submit =(request,response)=>{
+        console.log(request.body)
+        const body = []
+        request.on('data', (chunk) => {
+
+            // Saving the chunk data at server
+            body.push(chunk);
+            console.log(body)
+         });
+         request.on('end', () => {
+            // // Parsing the chunk data in buffer
+            // const parsedBody = Buffer.concat(body).toString();
+            // const message = parsedBody.split('=')[1];
+            // resolve(parsedBody);
+            // // Printing the data
+            // console.log(message);
+            return new Promise((resolve, reject) => {
+
+                const form = formidable({ multiples: true })
+                form.parse(request, (error, fields, files) => {
+                  if (error) {
+                    reject(error);
+                    return;
+                  }
+                  resolve({ ...fields, ...files });
+                });
+              })
+         });
     }
 
-module.exports = {submit};
+module.exports = {submit,create};

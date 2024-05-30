@@ -6,10 +6,25 @@ const nodemailer = require("nodemailer");
 const sha256 = require('sha256')
 const JWT_SECRET = process.env.JWT_SECRET
 const JWT_KEY = process.env.JWT_KEY
+const materialModel = require('../models/materialModel')
+const notificationModel = require('../models/notificationModel')
 
-
-
-
+  const sendNotif= async(request,response) =>{
+    const newNotif ={
+      courseID: request.body.ID,
+      title: request.body.title,
+      date: request.body.date,
+      info: request.body.info,
+    }
+    const done = await notificationModel.create(newNotif)
+    if (done) {
+      response.send("done")
+    }
+    else{
+      response.send("{not done")
+    }
+    
+  }
     
   const login = async(request, response) =>{
     console.log(request.body)
@@ -55,5 +70,18 @@ const JWT_KEY = process.env.JWT_KEY
     })
   }
 
+  const deleteMaterial = async (request,response) =>{
+    console.log(request.body)
+    const ID = request.body.ID
+    const found = materialModel.find({materialID: ID})
+    if (found.length == 0) {
+      console.log("Not found")
+      response.send("Not found")
+    } else {
+      await materialModel.deleteOne({materialID: ID})
+      response.send("Done")
+    }
+  }
 
-module.exports = {validate_token,login};
+
+module.exports = {validate_token,login, deleteMaterial, sendNotif};

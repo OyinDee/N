@@ -1,14 +1,11 @@
-
-
 const mongoose = require("mongoose");
 
-const AssignmentSchema = mongoose.Schema({
+const SubmissionSchema = mongoose.Schema({
     document: String,
-    courseID: Number,
+    assignmentID: Number,
     title: String,
     body: String,
-    deadline: Date,
-    ID: Number,
+    studentID: Number,
 });
 
 const assignmentModel = mongoose.model("assignments", AssignmentSchema);

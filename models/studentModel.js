@@ -6,12 +6,14 @@ const StudentSchema = mongoose.Schema({
     level: Number,
     token: String,
     tokenNumber: Number,
+    matricNumber: String,
     department: String,
     ID: Number,
     password: String,
     email: String,
     phoneNumber: Number,
     profile_image: String,
+    courses: Array,
     verified: {
         type: Boolean,
         default: false

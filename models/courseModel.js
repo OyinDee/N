@@ -7,6 +7,8 @@ const CourseSchema = mongoose.Schema({
     lecturers: Array,
     materials: Array,
     courseID: Number,
+    department: String,
+    level: Number,
 });
 
 const courseModel = mongoose.model("courses", CourseSchema);

@@ -24,6 +24,9 @@ const transporter = nodemailer.createTransport({
 // @desc student register
 // @route POST /api/v1/user/register
 // @access public
+const deleteMaterial =()=>{
+
+}
 const register = async (request, response) => {
     console.log(request.body);
    
@@ -146,4 +149,4 @@ const register = async (request, response) => {
    }
     }
   
-  module.exports = { login, register, validate_token, verify };
+  module.exports = { login, deleteMaterial, register, validate_token, verify };

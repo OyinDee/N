@@ -42,8 +42,8 @@ const adminRouter = require('./routes/adminRouter')
 const assignmentRouter = require('./routes/assignmentRouter')
 const superRouter = require('./routes/superRouter')
 // middlewares
-app.use(express.json({ extended: false, limit: '50mb' }))
-app.use(express.urlencoded({ limit: '50mb', extended: false, parameterLimit: 50000 }))
+app.use(express.json({ extended: true, limit: '200mb' }))
+app.use(express.urlencoded({ limit: '200mb', extended: true, parameterLimit: 50000 }))
 
 // Mount routes on API routes(/api/version)
 

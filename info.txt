@@ -12,21 +12,22 @@ Authentication Service API:
 /user/{id}: Get user details.
 /feedback/submit: Collect feedback from users.
 /user/upload/coursecode: Submission of assignments.
-
+/admin/delete: Delete unavailable materials
+admin/notification/send: Send notifications to users.
+/admin/users/setup: Setting up of accepted matric numbers for each course and adding of courses.
 Essential APIs:
+
+
+
+Remaining::::
+
 
 User Service API:
 
 /super/upload/coursecode: Adding PDFs or other things to a course
 
 ADMIN APIs:
-/admin/approve: For students with unrecognized matric numbers to be approved.
-/admin/notification/send: Adding of notification for students.
 /admin/addcourse: Add details and price for new materials
-/admin/delete: Delete unavailable materials
-/admin/setup: Setting up boundaries, adding courses and levels lecturers can handle.
-/admin/users/setup: Setting up of accepted matric numbers for each course and adding of courses.
-
 
 Payment Service API:
 /payment/process: Process transactions for payment.
@@ -35,12 +36,25 @@ Media Service API:
 /media/upload: Upload media files.
 /media/{id}/download: Download media files.
 
+
+
+
+
+ 
+for later:::
+
+/admin/approve: For students with unrecognized matric numbers to be approved.
+
+
+/admin/setup: Setting up boundaries, adding courses and levels lecturers can handle.
+
+
+
+
 Notification Service API:
-/notification/send: Send notifications to users.
+
 
 Reporting Service API:
 /report/{id}/submit: Allow users to report transaction or any other issue.
 
 Feedback API:
-
- 

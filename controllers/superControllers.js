@@ -226,6 +226,7 @@ const setupCourse = async(request, response) =>{
     students: request.body.students,
     lecturers: request.body.lecturers,
     materials: request.body.materials,
+    matricNumbers: request.body.matricNumbers,
     courseID: Math.floor(Math.random() * 9000) + 1000,
   }
   const courseCode = request.body.courseCode
