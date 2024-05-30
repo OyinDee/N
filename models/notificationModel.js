@@ -1,12 +1,12 @@
 const mongoose = require("mongoose");
 
 const NotificationSchema = mongoose.Schema({
-    courseID: String,
+    courseID: Number,
     date_created: Date,
     info: String,
     title: String,
 });
 
-const notificationModel = mongoose.model("materials", NotificationSchema);
+const notificationModel = mongoose.model("notifications", NotificationSchema);
 
 module.exports = notificationModel;

@@ -24,10 +24,10 @@ Remaining::::
 
 User Service API:
 
-/super/upload/coursecode: Adding PDFs or other things to a course
+/admin/upload/coursecode: Adding PDFs or other things to a course
 
 ADMIN APIs:
-/admin/addcourse: Add details and price for new materials
+
 
 Payment Service API:
 /payment/process: Process transactions for payment.
@@ -44,12 +44,6 @@ Media Service API:
 for later:::
 
 /admin/approve: For students with unrecognized matric numbers to be approved.
-
-
-/admin/setup: Setting up boundaries, adding courses and levels lecturers can handle.
-
-
-
 
 Notification Service API:
 

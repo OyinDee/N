@@ -1,4 +1,4 @@
-const { login, validate_token, deleteMaterial, sendNotif} = require("../controllers/studentControllers");
+const { login, validate_token, deleteMaterial, sendNotif} = require("../controllers/adminControllers");
 
 const adminRouter = require("express").Router();
 

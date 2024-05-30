@@ -11,9 +11,9 @@ const notificationModel = require('../models/notificationModel')
 
   const sendNotif= async(request,response) =>{
     const newNotif ={
-      courseID: request.body.ID,
+      courseID: request.body.courseID,
       title: request.body.title,
-      date: request.body.date,
+      date_created: Date.now(),
       info: request.body.info,
     }
     const done = await notificationModel.create(newNotif)
