@@ -8,6 +8,7 @@ const StudentSchema = mongoose.Schema({
     tokenNumber: Number,
     matricNumber: String,
     department: String,
+    coursesID: Array,
     ID: Number,
     password: String,
     email: String,

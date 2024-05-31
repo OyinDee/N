@@ -8,6 +8,6 @@ const SubmissionSchema = mongoose.Schema({
     studentID: Number,
 });
 
-const assignmentModel = mongoose.model("assignments", AssignmentSchema);
+const submissionModel = mongoose.model("submissions", SubmissionSchema);
 
-module.exports = assignmentModel;
+module.exports = submissionModel;

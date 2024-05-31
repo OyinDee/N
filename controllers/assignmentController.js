@@ -18,7 +18,7 @@ const JWT_KEY = process.env.JWT_KEY
         api_secret: process.env.API_SECRET 
     });
     
-    // Upload an image
+
     const create = async(request,response) =>{
         const ID =  Math.floor(Math.random() * 9000) + 1000;
         console.log(request.body)
@@ -32,6 +32,8 @@ const JWT_KEY = process.env.JWT_KEY
         assignmentModel.create(newsAssignment)
         response.send("submitted")
     }
+
+    
     const submit =(request,response)=>{
         console.log(request.body)
         const body = []

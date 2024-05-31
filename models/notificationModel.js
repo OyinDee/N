@@ -5,6 +5,11 @@ const NotificationSchema = mongoose.Schema({
     date_created: Date,
     info: String,
     title: String,
+    private: {
+        default: false,
+        type: Boolean
+    },
+    studentID: Number,
 });
 
 const notificationModel = mongoose.model("notifications", NotificationSchema);
